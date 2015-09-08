@@ -2,11 +2,6 @@
 
 namespace Dafiti\Monolog;
 
-require_once ('../../bob/vendor/autoload.php');
-require_once ('Handler/StreamHandler.php');
-require_once ('Handler/NewRelicHandler.php');
-require_once ('Formatter/LogstashFormatter.php');
-
 use \Monolog\Logger;
 use \Monolog\Processor\TagProcessor;
 
@@ -20,7 +15,6 @@ class Factory
             $logger->pushHandler(new \Dafiti\Monolog\Handler\NewRelicHandler());
         }
 
-        putenv('MESSAGE_ID=123456');
         if (getenv('MESSAGE_ID') != '') {
             $tag = new TagProcessor(['request-id' => getenv('MESSAGE_ID')]);
             $logger->pushProcessor($tag);
@@ -34,6 +28,3 @@ class Factory
         return $logger;
     }
 }
-
-$teste = (new Factory())->createInstance('alice', Logger::INFO, true);
-$teste->log(Logger::INFO,'testando');
