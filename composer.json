@@ -1,0 +1,13 @@
+{
+    "name": "dafiti/dafiti-libs",
+    "description": "Dafiti libraries",
+    "license": "All rights by Dafiti",
+    "keywords": [ "dafiti", "libs", "dafiti-libs" ],
+    "target-dir": "",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "master"
+        }
+    }
+}
+
