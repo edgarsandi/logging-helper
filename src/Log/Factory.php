@@ -9,8 +9,11 @@ use \Monolog\Logger,
 
 class Factory
 {
-    private $stream;
-
+    /**
+     * @param  string $applicationName
+     * @param  string $stream
+     * @return \Monolog\Logger $logger
+     */
     public function createInstance($applicationName, $stream)
     {
         if (!isset($applicationName, $stream)) {
