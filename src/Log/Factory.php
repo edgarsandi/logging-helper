@@ -2,16 +2,17 @@
 
 namespace Dafiti\Log;
 
-use \Monolog\Logger,
-    \Monolog\Handler\NewRelicHandler,
-    \Monolog\Handler\StreamHandler,
-    \Monolog\Processor\TagProcessor;
+use Monolog\Logger;
+use Monolog\Handler\NewRelicHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Processor\TagProcessor;
 
 class Factory
 {
     /**
-     * @param  string $applicationName
-     * @param  string $stream
+     * @param string $applicationName
+     * @param string $stream
+     *
      * @return \Monolog\Logger $logger
      */
     public function createInstance($applicationName, $stream)

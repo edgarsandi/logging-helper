@@ -2,8 +2,8 @@
 
 namespace Dafiti\Tests\Log;
 
-use org\bovigo\vfs\vfsStream, 
-    org\bovigo\vfs\vfsStreamWrapper;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
 
 class FactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -28,13 +28,15 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Level "999" is not defined, use one of: 100, 
+     * @expectedExceptionMessage Level "999" is not defined, use one of: 100,
      *     200, 250, 300, 400, 500, 550, 600
-     */ 
+     */
     public function testShouldThrowExceptionWithInvalidLogLevel()
     {
-        $logger = (new \Dafiti\Log\Factory())->createInstance('logging_helper',
-            vfsStream::url('logs/logging_helper.log'));
+        $logger = (new \Dafiti\Log\Factory())->createInstance(
+            'logging_helper',
+            vfsStream::url('logs/logging_helper.log')
+        );
         $logger->log(999, null);
     }
 
@@ -45,7 +47,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             "channel":"alice","level":"INFO"}');
         unset($expected->{'@timestamp'}, $expected->{'host'});
         $logger = (new \Dafiti\Log\Factory())->createInstance(
-            'alice', 
+            'alice',
             vfsStream::url('logs/logging_helper.log')
         );
         $logger->log(\Monolog\Logger::INFO, 'any message');
