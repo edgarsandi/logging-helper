@@ -1,13 +1,29 @@
 {
-    "name": "dafiti/dafiti-libs",
-    "description": "Dafiti libraries",
-    "license": "All rights by Dafiti",
+    "name": "dafiti/logging-helper",
+    "description": "Dafiti Logging Helper",
+    "license": "",
     "keywords": [ "dafiti", "libs", "dafiti-libs" ],
-    "target-dir": "",
     "extra": {
         "branch-alias": {
             "dev-master": "master"
         }
+    },
+    "require": {
+        "monolog/monolog": "~1.13.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable",
+        "fabpot/php-cs-fixer": "@stable",
+        "mikey179/vfsStream": "1.2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dafiti\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dafiti\\": "tests/"
+        }
     }
 }
-
