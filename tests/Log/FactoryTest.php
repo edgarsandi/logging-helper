@@ -43,26 +43,26 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $expected = json_decode('{"@timestamp":"2015-09-09T02:50:16.504087+00:00",
             "@version":1,"host":"sake","message":"any message","type":"alice",
             "channel":"alice","level":"INFO"}');
-        unset($expected->{'@timestamp'});
+        unset($expected->{'@timestamp'}, $expected->{'host'});
         $logger = (new \Dafiti\Log\Factory())->createInstance(
             'alice', 
             vfsStream::url('logs/logging_helper.log')
         );
         $logger->log(\Monolog\Logger::INFO, 'any message');
         $actual = json_decode(file_get_contents(vfsStream::url('logs/logging_helper.log')));
-        unset($actual->{'@timestamp'});
+        unset($actual->{'@timestamp'}, $actual->{'host'});
         $this->assertEquals($expected, $actual);
     }
 
     public function testShouldCreateTagProcessorWhenRequestIdExists()
     {
         $expected = json_decode('{"@timestamp":"2015-09-09T03:09:05.653923+00:00","@version":1,"host":"sake","message":"any message","type":"logging_helper","channel":"logging_helper","level":"INFO","tags":{"request-id":"1234567890"}}');
-        unset($expected->{'@timestamp'});
+        unset($expected->{'@timestamp'}, $expected->{'host'});
         putenv('MESSAGE_ID=1234567890');
         $logger = (new \Dafiti\Log\Factory())->createInstance('logging_helper', vfsStream::url('logs/logging_helper.log'));
         $logger->log(\Monolog\Logger::INFO, 'any message');
         $actual = json_decode(file_get_contents(vfsStream::url('logs/logging_helper.log')));
-        unset($actual->{'@timestamp'});
+        unset($actual->{'@timestamp'}, $actual->{'host'});
         $this->assertEquals($expected, $actual);
     }
 }
