@@ -1,6 +1,6 @@
 <?php
 
-namespace Dafiti\Monolog\Formatter;
+namespace Dafiti\Log\Formatter;
 
 class LogstashFormatter extends \Monolog\Formatter\LogstashFormatter
 {
