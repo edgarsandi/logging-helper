@@ -1,14 +1,23 @@
 {
     "name": "dafiti/logging-helper",
     "description": "Dafiti Logging Helper",
-    "license": "",
-    "keywords": [ "dafiti", "libs", "dafiti-libs" ],
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "dafiti",
+        "helper",
+        "logger",
+        "newrelic",
+        "logstash"
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "master"
         }
     },
+    "minimum-stability": "dev",
     "require": {
+        "php": ">=5.5.0",
         "monolog/monolog": "~1.17.1"
     },
     "require-dev": {
