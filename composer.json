@@ -9,7 +9,7 @@
         }
     },
     "require": {
-        "monolog/monolog": "~1.13.1"
+        "monolog/monolog": "~1.17.1"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable",
