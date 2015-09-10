@@ -10,11 +10,6 @@
         "newrelic",
         "logstash"
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "master"
-        }
-    },
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.5.0",
