@@ -17,3 +17,6 @@ script:
 after_script:                                                                    
     - wget https://scrutinizer-ci.com/ocular.phar                                
     - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+
+notifications:
+  hipchat: OFphNFEpfKvIBVX7Zz6emmpEXZ6cbqTpfInl6fyV@Dafiti Labs
