@@ -34,9 +34,8 @@ class Factory
             $logger->pushProcessor($tag);
         }
 
-        $formatter = new Formatter\LogstashFormatter($applicationName);
-
         $streamHandler = new StreamHandler($stream);
+        $formatter = new Formatter\LogstashFormatter($applicationName);
         $streamHandler->setFormatter($formatter);
         $logger->pushHandler($streamHandler);
 
