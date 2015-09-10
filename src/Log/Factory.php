@@ -23,10 +23,7 @@ class Factory
         }
 
         $logger = new Logger($applicationName);
-
-        if (extension_loaded('newrelic')) {
-            $logger->pushHandler(new NewRelicHandler());
-        }
+        $logger->pushHandler(new NewRelicHandler());
 
         $requestId = getenv('MESSAGE_ID');
         if ($requestId != '') {
