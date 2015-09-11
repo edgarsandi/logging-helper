@@ -7,6 +7,9 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/dafiti/logging-helper.svg?style=flat-square)](https://packagist.org/packages/dafiti/logging-helper)
 [![License](https://img.shields.io/packagist/l/dafiti/logging-helper.svg?style=flat-square)](https://packagist.org/packages/dafiti/logging-helper)
 
+## Preface
+This helper should be used for all workcells, all log generated will be sent to the Newrelic (if enabled and configured) and also to file system formatted with LogstashFormatter.
+
 ## Instalation
 The package is available on [Packagist](http://packagist.org/packages/dafiti/logging-helper).
 Autoloading is [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) compatible.
