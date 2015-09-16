@@ -25,12 +25,110 @@ Autoloading is [PSR-4](https://github.com/php-fig/fig-standards/blob/master/acce
 
 ## Usage
 ### Basic
+#### logging message
 ```php
 $logger = (new \Dafiti\Log\Factory())->createInstance('<application name>', '<log path/filename>');
 $logger->log(<log level>, '<log message>');
 ```
+##### outputs
+```json
+{"@timestamp":"2015-09-16T13:41:15.626418-03:00","@version":1,"host":"server01","message":"<log message>","type":"<application name>","channel":"<application name>","level":"<log level>"}
+```
 
-#### \<application name\>:
+#### Logging message and more values 
+You can send an array of key value pair: 
+```php
+$logger = (new \Dafiti\Log\Factory())->createInstance('<application name>', '<log path/filename>');
+$logger->log(<log level>, '<log message>', [<key-value-pair>]);
+```
+
+##### Example:
+```php
+$values = ['string' => 'value', 'int' => 10, 'float' => 10.0, 'bool' => true, 'resource' => null, 'object' => (new stdClass()), 'sub-array' => range('A', 'D')];
+$logger = (new \Dafiti\Log\Factory())->createInstance('<application name>', '<log path/filename>');
+$logger->log(<log level>, '<log message>', $values);
+```
+##### outputs
+```json
+{"@timestamp":"2015-09-16T14:51:42.636524-03:00","@version":1,"host":"7dd53b17bdec","message":"<log message>","type":"<application name>","channel":"<application name>","level":"<log level>","string":"value","int":10,"float":10,"bool":true,"resource":null,"object":"[object] (stdClass: {})","sub-array":["A","B","C","D","E"]}
+```
+
+### Alternative
+In alternative to log method you can use the add<log level> methods:
+##### addDebug
+```php
+$logger = (new \Dafiti\Log\Factory())->createInstance('<application name>', '<log path/filename>');
+$logger->addDebug('<log message>', [<key-value-pair>]);
+```
+##### outputs
+```json
+{"@timestamp":"2015-09-16T13:41:15.626418-03:00","@version":1,"host":"server01","message":"<log message>","type":"<application name>","channel":"<application name>","level":"DEBUG"}
+```
+##### addInfo
+```php
+$logger = (new \Dafiti\Log\Factory())->createInstance('<application name>', '<log path/filename>');
+$logger->addInfo('<log message>', [<key-value-pair>]);
+```
+##### outputs
+```json
+{"@timestamp":"2015-09-16T13:41:15.626418-03:00","@version":1,"host":"server01","message":"<log message>","type":"<application name>","channel":"<application name>","level":"INFO"}
+```
+##### addNotice
+```php
+$logger = (new \Dafiti\Log\Factory())->createInstance('<application name>', '<log path/filename>');
+$logger->addNotice('<log message>', [<key-value-pair>]);
+```
+##### outputs
+```json
+{"@timestamp":"2015-09-16T13:41:15.626418-03:00","@version":1,"host":"server01","message":"<log message>","type":"<application name>","channel":"<application name>","level":"NOTICE"}
+```
+##### addWarning
+```php
+$logger = (new \Dafiti\Log\Factory())->createInstance('<application name>', '<log path/filename>');
+$logger->addWarning('<log message>', [<key-value-pair>]);
+```
+##### outputs
+```json
+{"@timestamp":"2015-09-16T13:41:15.626418-03:00","@version":1,"host":"server01","message":"<log message>","type":"<application name>","channel":"<application name>","level":"WARNING"}
+```
+##### addError
+```php
+$logger = (new \Dafiti\Log\Factory())->createInstance('<application name>', '<log path/filename>');
+$logger->addError('<log message>', [<key-value-pair>]);
+```
+##### outputs
+```json
+{"@timestamp":"2015-09-16T13:41:15.626418-03:00","@version":1,"host":"server01","message":"<log message>","type":"<application name>","channel":"<application name>","level":"ERROR"}
+```
+##### addCritical
+```php
+$logger = (new \Dafiti\Log\Factory())->createInstance('<application name>', '<log path/filename>');
+$logger->addCritical('<log message>', [<key-value-pair>]);
+```
+##### outputs
+```json
+{"@timestamp":"2015-09-16T13:41:15.626418-03:00","@version":1,"host":"server01","message":"<log message>","type":"<application name>","channel":"<application name>","level":"CRITICAL"}
+```
+##### addAlert
+```php
+$logger = (new \Dafiti\Log\Factory())->createInstance('<application name>', '<log path/filename>');
+$logger->addAlert('<log message>', [<key-value-pair>]);
+```
+##### outputs
+```json
+{"@timestamp":"2015-09-16T13:41:15.626418-03:00","@version":1,"host":"server01","message":"<log message>","type":"<application name>","channel":"<application name>","level":"ALERT"}
+```
+##### addEmergency
+```php
+$logger = (new \Dafiti\Log\Factory())->createInstance('<application name>', '<log path/filename>');
+$logger->addEmergency('<log message>', [<key-value-pair>]);
+```
+##### outputs
+```json
+{"@timestamp":"2015-09-16T13:41:15.626418-03:00","@version":1,"host":"server01","message":"<log message>","type":"<application name>","channel":"<application name>","level":"EMERGENCY"}
+```
+
+#### \<application name\> samples:
 * alice
 * bob
 * checkout
@@ -39,19 +137,19 @@ $logger->log(<log level>, '<log message>');
 * others
 
 #### \<log path/filename\>:
-The logstash will parse the file ... (sugestion of path default instead whatever paths? (infra question?))
+Use the default log path
 
-#### \<log level\>
-| Type      | Usage                            | Log code | Description                                 | Example                                                                                            |
-| --------- |--------------------------------- | -------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Debug     | ```\Monolog\Logger::DEBUG```     |  100     | Detailed debug information                  |                                                                                                    |
-| Info      | ```\Monolog\Logger::INFO```      |  200     | Interesting events                          | User logs in, SQL logs                                                                             |
-| Notice    | ```\Monolog\Logger::NOTICE```    |  250     | Uncommon events                             |                                                                                                    |
-| Warning   | ```\Monolog\Logger::WARNING```   |  300     | Exceptional occurrences that are not errors | Use of deprecated APIs, poor use of an API, undesirable things that are not necessarily wrong      |
-| Error     | ```\Monolog\Logger::ERROR```     |  400     | Runtime errors                              |                                                                                                    |
-| Critical  | ```\Monolog\Logger::CRITICAL```  |  500     | Critical conditions                         | Application component unavailable, unexpected exception                                            |
-| Alert     | ```\Monolog\Logger::ALERT```     |  550     | Action must be taken immediately            | Entire website down, database unavailable, etc. This should trigger the SMS alerts and wake you up |
-| Emergency | ```\Monolog\Logger::EMERGENCY``` |  600     | Urgent alert                                | This is only bumped when API breaks are done and should follow the major version of the library    |
+#### \<log level\> available:
+| Type      | Usage                            | Log code | Alternative method | Description                                 | Example                                                                                            |
+| --------- |--------------------------------- | -------- | ------------------ | ------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Debug     | ```\Monolog\Logger::DEBUG```     |  100     | addDebug()         | Detailed debug information                  |                                                                                                    |
+| Info      | ```\Monolog\Logger::INFO```      |  200     | addInfo()          | Interesting events                          | User logs in, SQL logs                                                                             |
+| Notice    | ```\Monolog\Logger::NOTICE```    |  250     | addNotice()        | Uncommon events                             |                                                                                                    |
+| Warning   | ```\Monolog\Logger::WARNING```   |  300     | addWarning()       | Exceptional occurrences that are not errors | Use of deprecated APIs, poor use of an API, undesirable things that are not necessarily wrong      |
+| Error     | ```\Monolog\Logger::ERROR```     |  400     | addError()         | Runtime errors                              |                                                                                                    |
+| Critical  | ```\Monolog\Logger::CRITICAL```  |  500     | addCritical()      | Critical conditions                         | Application component unavailable, unexpected exception                                            |
+| Alert     | ```\Monolog\Logger::ALERT```     |  550     | addAlert()         | Action must be taken immediately            | Entire website down, database unavailable, etc. This should trigger the SMS alerts and wake you up |
+| Emergency | ```\Monolog\Logger::EMERGENCY``` |  600     | addEmergency()     | Urgent alert                                | This is only bumped when API breaks are done and should follow the major version of the library    |
 
 #### \<log message\>:
 Sugestion with max length? Others sugestions?
