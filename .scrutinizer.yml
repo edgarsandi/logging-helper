@@ -4,7 +4,6 @@ filter:
 checks:
     php:
         code_rating: true
-        duplication: true
 tools:
     php_analyzer: true
     php_mess_detector: true
