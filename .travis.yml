@@ -18,4 +18,4 @@ after_script:
     - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
 
 notifications:
-  hipchat: OFphNFEpfKvIBVX7Zz6emmpEXZ6cbqTpfInl6fyV@Dafiti Labs
+  hipchat: 365ed34e4a590ff19b44a44bf08619@1963196
