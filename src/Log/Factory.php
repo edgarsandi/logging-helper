@@ -15,7 +15,7 @@ class Factory
      *
      * @return \Monolog\Logger $logger
      */
-    public function createInstance($applicationName, $stream)
+    public function createInstance($applicationName, $stream, $logLevel = \Monolog\Logger::ERROR)
     {
         if (!isset($applicationName, $stream)) {
             throw new \InvalidArgumentException('The $applicationName and $stream
@@ -34,7 +34,7 @@ class Factory
             $logger->pushProcessor($tag);
         }
 
-        $streamHandler = new StreamHandler($stream);
+        $streamHandler = new StreamHandler($stream, $logLevel);
         $formatter = new Formatter\LogstashFormatter($applicationName);
         $streamHandler->setFormatter($formatter);
         $logger->pushHandler($streamHandler);
