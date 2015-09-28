@@ -17,7 +17,7 @@ Autoloading is [PSR-4](https://github.com/php-fig/fig-standards/blob/master/acce
 ```json
 {
     "require": {
-        "dafiti/logging-helper": "0.0.2"
+        "dafiti/logging-helper": "0.0.3"
     }
 }
 ```
