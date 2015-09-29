@@ -10,19 +10,19 @@ use Monolog\Processor\TagProcessor;
 class Factory
 {
     /**
-     * @param string $applicationName
+     * @param string $logName
      * @param string $stream
      *
      * @return \Monolog\Logger $logger
      */
-    public function createInstance($applicationName, $stream, $logLevel = \Monolog\Logger::ERROR)
+    public function createInstance($logName, $stream, $logLevel = \Monolog\Logger::ERROR)
     {
-        if (!isset($applicationName, $stream)) {
-            throw new \InvalidArgumentException('The $applicationName and $stream
+        if (!isset($logName, $stream)) {
+            throw new \InvalidArgumentException('The $logName and $stream
              parameters are required');
         }
 
-        $logger = new Logger($applicationName);
+        $logger = new Logger($logName);
 
         if (extension_loaded('newrelic')) {
             $logger->pushHandler(new NewRelicHandler());
@@ -35,7 +35,7 @@ class Factory
         }
 
         $streamHandler = new StreamHandler($stream, $logLevel);
-        $formatter = new Formatter\LogstashFormatter($applicationName);
+        $formatter = new Formatter\LogstashFormatter($logName);
         $streamHandler->setFormatter($formatter);
         $logger->pushHandler($streamHandler);
 
