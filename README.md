@@ -22,7 +22,7 @@ Autoloading is [PSR-4](https://github.com/php-fig/fig-standards/blob/master/acce
 }
 ```
 
-The minimal log level default is \Monolog\Logger::ERROR, when the third parameter has been omitted, this will be the minimun log level of logger instance
+The minimal log level default is \Monolog\Logger::ERROR, when the third parameter has been omitted, this will be the minimum log level of logger instance
 All messages sent with a less log level (example: \Monolog\Logger::DEBUG) will not be logged because the minimum log level is greater
 
 ## Usage
