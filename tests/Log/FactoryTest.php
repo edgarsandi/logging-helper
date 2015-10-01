@@ -278,4 +278,44 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+    public function testShouldLogMessageWithCustomChannelInfo()
+    {
+        $expected = json_decode('{"@timestamp":"<any>",
+            "@version":1,"host":"sake","message":"INFO message","type":"logName",
+            "channel":"oneChannel","level":"INFO"}');
+        unset($expected->{'@timestamp'}, $expected->{'host'});
+
+        $logger = (new \Dafiti\Log\Factory())->createInstance(
+            'logName',
+            vfsStream::url('logs/logging_helper.log'),
+            \Monolog\Logger::DEBUG
+        );
+
+        $logger->addInfo('INFO message', ['channel' => 'oneChannel']);
+        $actual = json_decode(file_get_contents(vfsStream::url('logs/logging_helper.log')));
+        unset($actual->{'@timestamp'}, $actual->{'host'});
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testShouldLogMessageWithCustomTypeInfo()
+    {
+        $expected = json_decode('{"@timestamp":"<any>",
+            "@version":1,"host":"sake","message":"INFO message","type":"oneType",
+            "channel":"logName","level":"INFO"}');
+        unset($expected->{'@timestamp'}, $expected->{'host'});
+
+        $logger = (new \Dafiti\Log\Factory())->createInstance(
+            'logName',
+            vfsStream::url('logs/logging_helper.log'),
+            \Monolog\Logger::DEBUG
+        );
+
+        $logger->addInfo('INFO message', ['type' => 'oneType']);
+        $actual = json_decode(file_get_contents(vfsStream::url('logs/logging_helper.log')));
+        unset($actual->{'@timestamp'}, $actual->{'host'});
+
+        $this->assertEquals($expected, $actual);
+    }
 }
