@@ -70,15 +70,15 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $expected = json_decode('{"@timestamp":"<any>",
             "@version":1,"host":"sake","message":"ERROR message",
             "type":"logging_helper","channel":"logging_helper","level":"ERROR",
-            "tags":{"request-id":"1234567890"}}');
+            "request-id":"1234567890"}');
         unset($expected->{'@timestamp'}, $expected->{'host'});
 
-        putenv('MESSAGE_ID=1234567890');
+        putenv('REQUEST_ID=1234567890');
         $logger = (new \Dafiti\Log\Factory())->createInstance('logging_helper', vfsStream::url('logs/logging_helper.log'));
         $logger->log(\Monolog\Logger::ERROR, 'ERROR message');
         $actual = json_decode(file_get_contents(vfsStream::url('logs/logging_helper.log')));
         unset($actual->{'@timestamp'}, $actual->{'host'});
-        putenv('MESSAGE_ID');
+        putenv('REQUEST_ID');
 
         $this->assertEquals($expected, $actual);
     }
