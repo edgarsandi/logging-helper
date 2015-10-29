@@ -2,10 +2,10 @@
 
 namespace Dafiti\Log;
 
+use Dafiti\Log\Processor\RequestIdProcessor;
+use Dafiti\Log\Handler\NewRelicHandler;
 use Monolog\Logger;
-use Monolog\Handler\NewRelicHandler;
 use Monolog\Handler\StreamHandler;
-use Monolog\Processor\TagProcessor;
 
 class Factory
 {
@@ -24,15 +24,8 @@ class Factory
 
         $logger = new Logger($logName);
 
-        if (extension_loaded('newrelic')) {
-            $logger->pushHandler(new NewRelicHandler());
-        }
-
-        $requestId = getenv('MESSAGE_ID');
-        if ($requestId != '') {
-            $tag = new TagProcessor(['request-id' => $requestId]);
-            $logger->pushProcessor($tag);
-        }
+        $logger->pushHandler(new NewRelicHandler());
+        $logger->pushProcessor(new RequestIdProcessor());
 
         $streamHandler = new StreamHandler($stream, $logLevel);
         $formatter = new Formatter\LogstashFormatter($logName);
