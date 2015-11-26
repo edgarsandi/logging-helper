@@ -1,4 +1,5 @@
 # Logging Helper
+[![Dependency Status](https://www.versioneye.com/user/projects/56577ca7ff016c002c001d0b/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56577ca7ff016c002c001d0b)
 [![Build Status](https://img.shields.io/travis/dafiti/logging-helper/master.svg?style=flat-square)](https://travis-ci.org/dafiti/logging-helper)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/dafiti/logging-helper/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/dafiti/logging-helper/?branch=master)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/dafiti/logging-helper/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/dafiti/logging-helper/?branch=master)
